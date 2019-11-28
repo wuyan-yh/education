@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { navlist } from "../api/yin";
 export default {
   props: {},
   data() {
@@ -53,12 +54,19 @@ export default {
       isCollapse: true
     };
   },
+  created() {
+    this.aaa();
+  },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    async aaa() {
+      let res = await navlist();
+      console.log(res);
     }
   }
 };

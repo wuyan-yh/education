@@ -7,8 +7,9 @@ import { Message } from "element-ui"; //element Toast的提示
 //过滤请求
 axios.interceptors.request.use(
   config => {
-    //config 为请求的一些配置 例如：请求头 请求时间 Token  可以根据自己的项目需求个性化配置，参考axios的中文说明手册  自己多动动手
+    //config 为请求的一些配置 例如：请求头 请求时间 Token  可以根据自己的项目需求个性化配置，参考headers  自己多动动手
     //由于我们项目的后端大大给力，很多东西在服务端帮我们处理好了所以请求阶段只要传好参数就好了
+
     config.timeout = 10 * 1000; //请求响应时间
     return config;
   },
@@ -19,7 +20,7 @@ axios.interceptors.request.use(
 // 添加响应拦截器
 axios.interceptors.response.use(
   response => {
-    if (response.data.code === 0) {
+    if (response.data.code === 200) {
       //服务端定义的响应code码为0时请求成功
       return Promise.resolve(response.data); //使用Promise.resolve 正常响应
     } else if (response.data.code === 1401) {
