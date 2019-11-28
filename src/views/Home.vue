@@ -8,7 +8,11 @@
 // @ is an alias to /src
 
 export default {
-  name: "home",
-  components: {}
+  components: {},
+  data() {
+    return {};
+  },
+  methods: {}
 };
 </script>
+<style lang="scss"></style>
