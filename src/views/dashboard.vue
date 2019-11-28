@@ -1,11 +1,10 @@
 <!--  -->
 <template>
   <div class>
-    <el-container>
+    <el-container class="box">
+      <el-aside width="200px"><dashNav></dashNav></el-aside>
       <el-container>
-        <el-aside width="200px">
-          <dashNav></dashNav>
-        </el-aside>
+        <el-header>Header</el-header>
         <el-main>Main</el-main>
       </el-container>
     </el-container>
@@ -46,6 +45,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 //@import url(); 引入公共css类
+.box {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
 .el-header,
 .el-footer {
   background-color: #b3c0d1;
