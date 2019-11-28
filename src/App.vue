@@ -15,6 +15,5 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  background-color: #93defe;
 }
 </style>
