@@ -65,7 +65,8 @@ export default {
       console.log(key, keyPath);
     },
     async aaa() {
-      let res = await navlist();
+      let obj = {};
+      let res = await navlist(obj);
       console.log(res);
     }
   }

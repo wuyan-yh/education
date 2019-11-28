@@ -2,14 +2,24 @@ import axios from "axios";
 import { throwErr } from "@/utils"; //utils 捕捉服务端http状态码的方法
 import store from "@/store"; //引入vuex的相关操作
 import { Message } from "element-ui"; //element Toast的提示
+import loacl from "../localStorege";
 // import router from "@/router";
-
+axios.defaults.withCredentials = true;
+let headers = {};
+let token = loacl.fetch("tokens")[0] || [];
+if (token.length <= 0) {
+  headers = {};
+} else {
+  headers = {
+    token: token.token
+  };
+}
 //过滤请求
 axios.interceptors.request.use(
   config => {
     //config 为请求的一些配置 例如：请求头 请求时间 Token  可以根据自己的项目需求个性化配置，参考headers  自己多动动手
     //由于我们项目的后端大大给力，很多东西在服务端帮我们处理好了所以请求阶段只要传好参数就好了
-
+    config.headers = headers;
     config.timeout = 10 * 1000; //请求响应时间
     return config;
   },
