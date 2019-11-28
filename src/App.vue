@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p>26-6</p>
     <router-view></router-view>
   </div>
 </template>
