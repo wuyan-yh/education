@@ -19,7 +19,7 @@ axios.interceptors.request.use(
 // 添加响应拦截器
 axios.interceptors.response.use(
   response => {
-    if (response.data.code === 0) {
+    if (response.data.code === 200) {
       //服务端定义的响应code码为0时请求成功
       return Promise.resolve(response.data); //使用Promise.resolve 正常响应
     } else if (response.data.code === 1401) {
