@@ -1,7 +1,7 @@
 module.exports = {
   configureWebpack: {
     externals: {
-      "element-ui": "ELEMENT"
+      // "element-ui": "ELEMENT"
     }
   }
   //   devServer: {
