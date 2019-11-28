@@ -48,6 +48,9 @@ export default {
       let res = await list(obj);
       if (res.code == 200) {
         this.$store.commit("token", res.data);
+        this.$router.push({
+          path: "/dashboard"
+        });
       } else {
         console.log("请求失败");
       }
