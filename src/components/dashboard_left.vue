@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <div class="toggle" @click="isCollapse = !isCollapse">| | |</div>
+  <div :class="isCollapse ? 'lefts_left1' : 'lefts_left2'">
+    <div :class="isCollapse ? 'toggle2' : 'toggle1'" @click="isCollapses">
+      | | |
+    </div>
     <el-menu
       default-active="1-4-1"
       class="el-menu-vertical-demo"
@@ -9,7 +11,7 @@
       :collapse="isCollapse"
       background-color="#333744"
       text-color="white"
-      :collapse-transition="false"
+      :collapse-transition="true"
       router
       unique-opened
     >
@@ -20,7 +22,7 @@
           :index="String(index + 1)"
         >
           <template slot="title">
-            <span slot="title">{{ item.name }}</span>
+            <span slot="title" @click="getItem(item)">{{ item.name }}</span>
           </template>
           <template v-for="(item2, index2) in item.children">
             <el-submenu
@@ -59,7 +61,7 @@ export default {
   props: {},
   data() {
     return {
-      isCollapse: true,
+      isCollapse: false,
       navList: []
     };
   },
@@ -86,11 +88,20 @@ export default {
         path: item3.path,
         state: true
       };
+      console.log(obj);
       this.$store.commit("tag", obj);
       console.log(this.$store.state.tag);
     },
     push2(item2, index2) {
       console.log("two", item2, index2);
+    },
+    getItem(v) {
+      console.log(v.name);
+    },
+    isCollapses() {
+      this.isCollapse = !this.isCollapse;
+      this.$store.state.aside = !this.$store.state.aside;
+      console.log(this.$store.state.aside);
     }
   }
 };
@@ -101,8 +112,20 @@ export default {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   min-height: 400px;
 }
-.toggle {
+.toggle1 {
   height: 50px;
+  color: white;
   line-height: 50px;
+  position: absolute;
+  transition: all 1s;
+  left: 210px;
+}
+.toggle2 {
+  height: 50px;
+  color: white;
+  line-height: 50px;
+  position: absolute;
+  left: 60px;
+  transition: all 1s;
 }
 </style>
