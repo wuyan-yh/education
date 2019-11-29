@@ -2,7 +2,9 @@
 <template>
   <div class>
     <el-container class="box">
-      <el-aside width="200px"><dashNav></dashNav></el-aside>
+      <el-aside :style="{ width: this.$store.state.aside ? '200px' : '50px' }"
+        ><dashNav></dashNav
+      ></el-aside>
       <el-container>
         <el-header>Header</el-header>
         <el-main>
@@ -59,12 +61,21 @@ export default {
   text-align: center;
   line-height: 60px;
 }
-
+.lefts_left1 {
+  width: 0px;
+  background-color: #333744;
+  // transition: all 0.5s;
+}
+.lefts_left2 {
+  width: 200px;
+  background-color: #333744;
+  // transition: all 0.5s;
+}
 .el-aside {
-  background-color: #d3dce6;
-  color: #333;
+  background-color: #333744;
   text-align: center;
   line-height: 200px;
+  transition: all 1s;
 }
 
 .el-main {

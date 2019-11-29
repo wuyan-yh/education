@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     token: [],
     tag: [],
-    show: false
+    show: false,
+    aside: true
   },
   mutations: {
     token(state, data) {
