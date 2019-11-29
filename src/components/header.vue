@@ -1,41 +1,46 @@
 <!--  -->
 <template>
-  <div class>
-    <el-container class="box">
-      <el-aside width="200px"><dashNav></dashNav></el-aside>
-      <el-container>
-        <el-header>
-          <dashDer></dashDer>
-        </el-header>
-        <el-main>
-          <router-view></router-view>
-        </el-main>
-      </el-container>
-    </el-container>
+  <div class="">
+    <el-tag
+      v-for="(tag, index) in tags"
+      :key="tag.id"
+      closable
+      :type="tag.type"
+      @close="handleClose(tag, index)"
+    >
+      <router-link tag="span" :to="tag.path">
+        {{ tag.name }}
+      </router-link>
+    </el-tag>
   </div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import dashNav from "../components/dashboard_left";
-import dashDer from "../components/header";
+
 export default {
   //import引入的组件需要注入到对象中才能使用
-  components: {
-    dashNav,
-    dashDer
-  },
+  components: {},
   data() {
     //这里存放数据
     return {};
   },
   //监听属性 类似于data概念
-  computed: {},
+  computed: {
+    tags() {
+      return this.$store.state.tag;
+    }
+  },
   //监控data中的数据变化
   watch: {},
   //方法集合
-  methods: {},
+  methods: {
+    handleClose(tag, i) {
+      console.log(tag, i);
+      this.$store.commit("tagdel", i);
+    }
+  },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
@@ -51,43 +56,4 @@ export default {
 </script>
 <style lang="scss" scoped>
 //@import url(); 引入公共css类
-.box {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-}
-.el-header,
-.el-footer {
-  background-color: #b3c0d1;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
-}
-
-.el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-}
-
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
-}
-
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-}
 </style>

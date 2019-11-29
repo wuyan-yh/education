@@ -16,6 +16,10 @@ export default new Vuex.Store({
     },
     tag(state, data) {
       state.tag.push(data);
+      console.log(state.tag);
+    },
+    tagdel(state, i) {
+      state.tag.splice(i, 1);
     }
   },
   actions: {},
