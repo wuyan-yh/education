@@ -1,54 +1,54 @@
 <template>
   <div>
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-      <el-radio-button :label="false">展开</el-radio-button>
-      <el-radio-button :label="true">收起</el-radio-button>
-    </el-radio-group>
+    <div class="toggle" @click="isCollapse = !isCollapse">| | |</div>
     <el-menu
+      default-active="1-4-1"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
       :collapse="isCollapse"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b"
+      background-color="#333744"
+      text-color="white"
+      :collapse-transition="false"
+      router
+      unique-opened
     >
-      <!-- <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">导航一</span>
-        </template>
-        <el-menu-item-group>
-          <span slot="title">分组一</span>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <span slot="title">选项4</span>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
+      <template v-for="(item, index) in navList">
+        <el-submenu
+          :key="index"
+          v-if="item.name != '首页'"
+          :index="String(index + 1)"
+        >
+          <template slot="title">
+            <span slot="title">{{ item.name }}</span>
+          </template>
+          <template v-for="(item2, index2) in item.children">
+            <el-submenu
+              :key="index2"
+              @click="push2(item2, index2)"
+              v-if="item2.children.length > 0"
+              :index="item2.path"
+            >
+              <span slot="title">{{ item2.name }}</span>
+              <el-menu-item
+                :key="index3"
+                v-for="(item3, index3) in item2.children"
+                @click="push(item3, index3)"
+                :index="item3.path"
+                >{{ item3.name }}</el-menu-item
+              >
+            </el-submenu>
+          </template>
+          <template v-for="(item2, index2) in item.children">
+            <el-menu-item
+              v-if="item2.children.length <= 0"
+              :key="index2"
+              :index="item2.path"
+              >{{ item2.name }}</el-menu-item
+            >
+          </template>
         </el-submenu>
-      </el-submenu> -->
-      <el-submenu index="1" v-for="item in navList" :key="item.id">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">{{ item.name }}</span>
-        </template>
-        <el-menu-item-group>
-          <span slot="title">分组一</span>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <span slot="title">选项4</span>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
+      </template>
     </el-menu>
   </div>
 </template>
@@ -64,7 +64,7 @@ export default {
     };
   },
   created() {
-    this.aaa();
+    this.getNav();
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -73,11 +73,24 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    async aaa() {
+    async getNav() {
       let obj = {};
       let res = await navlist(obj);
-      console.log(res);
+      console.log(res.data.sysMenu);
       this.navList = res.data.sysMenu;
+    },
+    push(item3, index3) {
+      console.log(item3, index3);
+      let obj = {
+        name: item3.name,
+        path: item3.path,
+        state: true
+      };
+      this.$store.commit("tag", obj);
+      console.log(this.$store.state.tag);
+    },
+    push2(item2, index2) {
+      console.log("two", item2, index2);
     }
   }
 };
@@ -86,7 +99,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
   min-height: 400px;
+}
+.toggle {
+  height: 50px;
+  line-height: 50px;
 }
 </style>

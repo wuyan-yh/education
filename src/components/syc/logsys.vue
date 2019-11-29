@@ -1,27 +1,17 @@
 <!--  -->
 <template>
-  <div class>
-    <el-container class="box">
-      <el-aside width="200px"><dashNav></dashNav></el-aside>
-      <el-container>
-        <el-header>Header</el-header>
-        <el-main>
-          <router-view></router-view>
-        </el-main>
-      </el-container>
-    </el-container>
+  <div class="">
+    logsys
   </div>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import dashNav from "../components/dashboard_left";
+
 export default {
   //import引入的组件需要注入到对象中才能使用
-  components: {
-    dashNav
-  },
+  components: {},
   data() {
     //这里存放数据
     return {};
@@ -47,43 +37,4 @@ export default {
 </script>
 <style lang="scss" scoped>
 //@import url(); 引入公共css类
-.box {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-}
-.el-header,
-.el-footer {
-  background-color: #b3c0d1;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
-}
-
-.el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-}
-
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
-}
-
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-}
 </style>
