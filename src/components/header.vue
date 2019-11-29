@@ -11,6 +11,7 @@
       <router-link tag="span" :to="tag.path">
         {{ tag.name }}
       </router-link>
+      <p>{{ tag.name }}</p>
     </el-tag>
   </div>
 </template>
